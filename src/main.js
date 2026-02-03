@@ -19,7 +19,7 @@ const input = document.querySelector('input[name="search-text"]');
 const imageContainer = document.querySelector('.gallery');
 
  
-const imagesPerPage = 12;
+const imagesPerPage = 15;
 form.addEventListener('submit', onSearch);
 
 async function onSearch(event){
@@ -63,6 +63,27 @@ async function onSearch(event){
         hideLoader();
     }
 }
+ window.addEventListener('scroll', async () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+        currentPage += 1;
+        showLoader();
+        try {
+            const data = await getImagesByQuery(`${query}&page=${currentPage}&per_page=${imagesPerPage}`);
+            if (data.hits.length > 0) {
+                createGallery(data.hits);
+            }
+        } catch (error) {
+            iziToast.error({
+                title: 'Error', 
+                message: 'An error occurred while fetching more images.',
+                position: 'topRight'
+            });
+        } finally {
+            hideLoader();
+        }
+    }
+});
+
 
 
 

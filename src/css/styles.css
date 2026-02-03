@@ -44,7 +44,7 @@ input[type="text"]:active{
   color: #2E2F42;
 }
 
-button[type="submit"]{
+button{
   border-radius: 8px;
   padding-block: 8px;
   padding-inline: 16px;
@@ -55,7 +55,7 @@ button[type="submit"]{
   border: none;
 }
 
-button[type="submit"]:hover{
+button:hover{
   background-color: #6c8cff;
 }
 
